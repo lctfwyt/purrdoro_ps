@@ -9,11 +9,13 @@
 ## 使用指引
 
 下载链接：  
-https://github.com/user-attachments/files/30314166/purrdoro.zip
+https://github.com/user-attachments/files/30316342/purrdoro_ps.zip
 
 解压后，只需要双击 purrdoro.exe，设置好番茄个数、工作和休息时长，即可开始，小巧方便！
 
 （首次打开可能会触发 Windows 安全中心扫描，之后即可正常使用。）
+
+记得点击“创建桌面快捷方式”，以后就可以从桌面快捷访问了！
 
 zip 压缩包包含以下三个文件：
 - purrdoro.exe 应用入口，双击开启
@@ -21,7 +23,7 @@ zip 压缩包包含以下三个文件：
 - rest.wav 休息铃，可以自行更换，需保持文件名不变
 
 以上为使用必需的三个文件，如需其他源代码，请从此处下载：  
-https://github.com/lctfwyt/purrdoro_ps/archive/refs/tags/v1.0.0.zip。
+https://github.com/lctfwyt/purrdoro_ps/archive/refs/tags/v1.0.1.zip
 
 ## 开发笔记
 
@@ -33,7 +35,6 @@ PowerShell -> exe 打包命令（PowerShell）：
 Install-Module -Name ps2exe -Scope CurrentUser -Force
 
 # 打包
-CurrentUser -Force
 Invoke-PS2EXE `
     -InputFile "Purrdoro.ps1" `
     -OutputFile "Purrdoro.exe" `

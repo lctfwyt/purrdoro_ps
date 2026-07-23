@@ -140,7 +140,7 @@ function New-NumberInput {
 # ---------- 窗口 ----------
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "🐱 猫猫番茄钟"
-$form.Size = New-Object System.Drawing.Size(320, 280)
+$form.Size = New-Object System.Drawing.Size(320, 340)
 $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = "FixedDialog"
 $form.MaximizeBox = $false
@@ -188,6 +188,13 @@ $buttonStop.Size = New-Object System.Drawing.Size(120, 38)
 $buttonStop.Enabled = $false
 $form.Controls.Add($buttonStop)
 
+# ---------- 创建桌面快捷方式按钮 ----------
+$buttonShortcut = New-Object System.Windows.Forms.Button
+$buttonShortcut.Text = "创建桌面快捷方式"
+$buttonShortcut.Location = New-Object System.Drawing.Point(20, 240)
+$buttonShortcut.Size = New-Object System.Drawing.Size(260, 32)
+$form.Controls.Add($buttonShortcut)
+
 # ---------- 后台 Job 管理 ----------
 $script:CurrentJob = $null
 
@@ -203,6 +210,41 @@ function Set-UiRunning {
     param([bool]$Running)
     $buttonStart.Enabled = -not $Running
     $buttonStop.Enabled = $Running
+}
+
+# ---------- 快捷方式工具 ----------
+function New-DesktopShortcut {
+    $exePath = Join-Path $BaseDir "purrdoro.exe"
+    if (-not (Test-Path $exePath)) {
+        [System.Windows.Forms.MessageBox]::Show(
+            "找不到 purrdoro.exe`n请确保 exe 已打包并与本程序在同一目录",
+            "创建失败", "OK", "Error"
+        ) | Out-Null
+        return
+    }
+
+    $desktop = [Environment]::GetFolderPath("Desktop")
+    $shortcutPath = Join-Path $desktop "猫猫番茄钟.lnk"
+
+    try {
+        $WshShell = New-Object -ComObject WScript.Shell
+        $shortcut = $WshShell.CreateShortcut($shortcutPath)
+        $shortcut.TargetPath = $exePath
+        $shortcut.WorkingDirectory = $BaseDir
+        $shortcut.IconLocation = "$exePath,0"
+        $shortcut.Description = "猫猫番茄钟"
+        $shortcut.Save()
+
+        [System.Windows.Forms.MessageBox]::Show(
+            "快捷方式已创建！`n$shortcutPath",
+            "完成", "OK", "Information"
+        ) | Out-Null
+    } catch {
+        [System.Windows.Forms.MessageBox]::Show(
+            "创建快捷方式失败：`n$_",
+            "错误", "OK", "Error"
+        ) | Out-Null
+    }
 }
 
 # ---------- 按钮事件 ----------
@@ -225,6 +267,10 @@ $buttonStop.Add_Click({
     $labelStatus.ForeColor = "Blue"
     $labelProgress.Text = ""
     Set-UiRunning -Running $false
+})
+
+$buttonShortcut.Add_Click({
+    New-DesktopShortcut
 })
 
 # ---------- 定时轮询 Job 输出 ----------
