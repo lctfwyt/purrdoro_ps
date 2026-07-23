@@ -25,7 +25,7 @@ https://github.com/lctfwyt/purrdoro_ps/archive/refs/tags/v1.0.0.zip。
 
 ## 开发笔记
 
-使用 WinForms 绘制简易 UI，使用 PowerShell 进行系统级精确计时、调用系统 API 播放音乐文件，比 Web 应用稳定，最小化运行不再也不用担心吞铃声。
+使用 WinForms 绘制简易 UI，使用 PowerShell 进行系统级精确计时、调用系统 API 播放音乐文件，比 Web 应用可靠，最小化运行再也不用担心吞铃声。
 
 PowerShell -> exe 打包命令（PowerShell）：
 ```
