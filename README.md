@@ -17,8 +17,8 @@ https://github.com/user-attachments/files/30314166/purrdoro.zip
 
 zip 压缩包包含以下三个文件：
 - purrdoro.exe 应用入口，双击开启
-- work.exe 开工铃，可以自行更换，需保持文件名不变
-- rest.exe 休息铃，可以自行更换，需保持文件名不变
+- work.wav 开工铃，可以自行更换，需保持文件名不变
+- rest.wav 休息铃，可以自行更换，需保持文件名不变
 
 以上为使用必需的三个文件，如需其他源代码，请从此处下载：  
 https://github.com/lctfwyt/purrdoro_ps/archive/refs/tags/v1.0.0.zip。
